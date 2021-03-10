@@ -1,0 +1,42 @@
+---
+title: "2nd Assignment"
+author: "Jessica Gutierrez"
+date: "3/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("~/Documents/Courses/Data visualizartion")
+read.csv("birdsandseeds12_14.csv")
+
+plants<- read.csv("birdsandseeds12_14.csv")
+
+head(plants)
+
+```
+
+
+```{r}
+library(dplyr)
+plantspecies<- mutate(plants, Plant = paste(genus, species))
+```
+
+
+```{r}
+library(ggplot2)
+packageVersion("ggplot2")
+'3.3.0'
+```
+
+```{r}
+plants%>%
+  ggplot(aes(x=BirdCounts, y=Dispersal, color=genus)) +
+  geom_boxplot()+
+  geom_jitter(width=0.15, alpha=0.5) +
+  labs(y="Seed density") +
+  labs(x= "Bird counts") +
+  theme(legend.position="right") +
+  coord_flip() +
+  theme_classic()
+```
+
